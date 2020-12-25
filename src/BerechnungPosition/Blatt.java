@@ -8,7 +8,7 @@ import positions.Position2D;
 import positions.Position3D;
 
 public class Blatt {
-
+//GitTest
 	public static List<ASCIIZeichen> buchstaben = new ArrayList<>();
 	public static Position2D offsetBuchstaben = new Position2D(0, 0);
 
