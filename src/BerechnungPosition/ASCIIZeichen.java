@@ -35,4 +35,6 @@ public class ASCIIZeichen {
     public List<Linie> getLinien() {
         return linien;
     }
+    
+
 }
