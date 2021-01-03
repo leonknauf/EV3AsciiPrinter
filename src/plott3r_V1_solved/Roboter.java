@@ -1,6 +1,8 @@
 package plott3r_V1_solved;
 
+import lejos.hardware.Button;
 import lejos.hardware.Sound;
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.utility.Delay;
@@ -37,6 +39,7 @@ public class Roboter {
 		Sound.beep();
 		moveToHomePosition();
 		this.bereitePapierVor();
+		this.kalibriereZAchse();
 		resetTachoCounts();
 	}
 
@@ -52,6 +55,27 @@ public class Roboter {
 		zAchse.deaktiviere();
 		yAchse.setSpeed(Integer.MAX_VALUE);
 		yAchse.backward(2000);
+	}
+	
+	private void kalibriereZAchse() {
+		int id;
+		LCD.drawString("Bestätigen:", 0, 0);
+		LCD.drawString("Enter", 0, 1);
+		LCD.drawString("Zeilposition:", 0, 2);
+		LCD.drawString("Stift oben!", 0, 3);
+		do {
+		id = Button.waitForAnyEvent();
+		if(id == Button.ID_RIGHT) {
+			zAchse.rotate(90);
+		}
+		if(id == Button.ID_LEFT) {
+			zAchse.rotate(-90);
+		}
+		}while(id !=Button.ID_ENTER);
+		LCD.clear();
+
+			
+		
 	}
 
 	@Override

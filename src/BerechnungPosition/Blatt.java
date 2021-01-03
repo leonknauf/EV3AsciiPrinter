@@ -1,6 +1,5 @@
 package BerechnungPosition;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import plott3r_V1_solved.Roboter;
@@ -8,65 +7,74 @@ import positions.Position2D;
 import positions.Position3D;
 
 public class Blatt {
-//GitTest
-	public static List<ASCIIZeichen> buchstaben = new ArrayList<>();
-	public static Position2D offsetBuchstaben = new Position2D(0, 0);
+	private Position2D platzZwischenBuchstaben = new Position2D(5, 0);
+	private int geschwindigkeit = 10;
+	// private Position2D offsetBuchstaben = new Position2D(0, 0);
+	private Position2D offset = new Position2D(0, 0); // offset für den aktuellen Buchtsaben
+	private Roboter roboter;
 
-	public static void main(String args[]) {
-		
-		
-		buchstaben = LadeZeichen.importAsciiZeichen("zeichen.txt");
-		Roboter r = null;
-		try {
-			r = new Roboter();
-			//r.moveToPosition(new Position2D(20, 0),10 );
-			//Button.waitForAnyPress();
+	public Blatt(Roboter roboter, int space) {
+		platzZwischenBuchstaben.setX(space);
+		this.roboter = roboter;
+	}
 
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+	public Blatt(Roboter roboter) {
+		this.roboter = roboter;
+	}
+
+	public void druckeZeichen(List<ASCIIZeichen> zeichen) {
+
+		for (ASCIIZeichen z : zeichen) {
+			druckeEinZeichen(z, offset);
 		}
-		for (int i = 0; i <= buchstaben.size(); i++) {
-			List<Linie> linien = buchstaben.get(i).getLinien();
+
+	}
+
+	private void druckeEinZeichen(ASCIIZeichen zeichen, Position2D startposition) {
+
+		for (Linie l : zeichen.getLinien()) {
+			try {
+				roboter.moveToPosition(getStartPos(l, startposition), geschwindigkeit);
+				roboter.moveToPosition(getEndPos(l, startposition), geschwindigkeit);
+				
 			
-			
-			for (Linie l : linien) {
-				try {
-					//LCD.drawInt(l.getStartX(), 1, 0);
-					//LCD.drawInt(l.getStartY(), 5, 0);
-					//LCD.drawInt(l.getEndX(), 1, 2);
-					//LCD.drawInt(l.getEndY(), 10, 2);
-
-					//Button.waitForAnyPress();
-					
-					
-					r.moveToPosition(getStartPos(l), 10);
-					r.moveToPosition(getEndPos(l), 10);
-
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-
-				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 		}
+		offset.add(buchstabenOffset(zeichen));
+		offset.add(platzZwischenBuchstaben);
+		
+		
+		try {
+			roboter.moveToPosition(new Position3D(offset, false), geschwindigkeit);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+	
 
 	}
 
-	private static Position3D getStartPos(Linie linie) {
-		Position3D pos = new Position3D(linie.getStartX()*5, linie.getStartY()*5,false);
+	private Position3D getStartPos(Linie linie, Position2D offset) {
+
+		Position3D pos = new Position3D(linie.getStartX() * 5, linie.getStartY() * 5, false);
+		pos.add(offset);
 		return pos;
 
 	}
 
-	private static Position3D getEndPos(Linie linie) {
-		Position3D pos = new Position3D(linie.getEndX()*5, linie.getEndY()*5,true);
+	private Position3D getEndPos(Linie linie, Position2D offset) {
+		Position3D pos = new Position3D(linie.getEndX() * 5, linie.getEndY() * 5, true);
+		pos.add(offset);
 		return pos;
 	}
 
-	private void buchstabenOffset(ASCIIZeichen buchstabe) {
-		offsetBuchstaben.setX(offsetBuchstaben.getX() + buchstabe.getMaxX());
+	private Position2D buchstabenOffset(ASCIIZeichen buchstabe) {
+
+		return new Position2D(buchstabe.getMaxX() * 5, 0);
 
 	}
 

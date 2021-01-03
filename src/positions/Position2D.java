@@ -1,7 +1,5 @@
 package positions;
 
-
-
 public class Position2D {
 
 	private double x, y;
@@ -17,6 +15,13 @@ public class Position2D {
 			return true;
 
 		return false;
+	}
+	public  void add(Position2D position) {
+			this.x = this.x + position.x;
+			this.y = this.y + position.y;
+		
+		//return position;
+		
 	}
 
 	public double getX() {
