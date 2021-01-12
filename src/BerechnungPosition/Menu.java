@@ -81,8 +81,8 @@ public class Menu {
 		// Groesse
 		LCD.clear();
 		AuswahlMenue(schriftgroesse, 0, "Groesse");
-		AuswahlMenue(zeilenabsstand, 2, "Abstand");
-		AuswahlMenue(abstandZwischenBuchstaben, 4, "Zeilenabstand");
+		AuswahlMenue(zeilenabsstand, 2, "Zeilenabstand");
+		AuswahlMenue(abstandZwischenBuchstaben, 4, "Abstand Buchst.");
 		zeigeAktiv();
 		
 
