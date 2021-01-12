@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 
 
-
+//Laden des Texts aus Datei
 public class Text {
 
 	private String druckText = "";

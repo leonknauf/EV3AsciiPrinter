@@ -35,7 +35,7 @@ public class Menu {
 	}
 
 
-
+//Auswahl der Einstellungen
 	private void auswahl() {
 		int id;
 		
@@ -76,9 +76,8 @@ public class Menu {
 		}while(id != Button.ID_ENTER);
 		
 	}
-	
+	//Anzeigen des gesamten Menue
 	private void drawMenu() {
-		// Groesse
 		LCD.clear();
 		AuswahlMenue(schriftgroesse, 0, "Groesse");
 		AuswahlMenue(zeilenabsstand, 2, "Zeilenabstand");
@@ -89,6 +88,7 @@ public class Menu {
 		
 		
 	}
+	//Anzeige für die Einzelnen Menuepunkte
 	private void AuswahlMenue(Integer werte, int startPosition, String name ) {
 		LCD.drawString(name + ":", 0, startPosition);
 		LCD.drawChar('<', 2, startPosition+1);
@@ -119,6 +119,7 @@ public class Menu {
 		LCD.drawChar('>', 8, startPosition+1);
 		}
 	}
+	//Zeigt den Pfeil vor dem aktiven Element an
 	private void zeigeAktiv() {
 		switch(aktiverWert) {
 		case 0:

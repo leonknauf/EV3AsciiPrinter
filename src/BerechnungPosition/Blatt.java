@@ -13,7 +13,6 @@ public class Blatt {
 	private int zeilenabstand = 5;
 	private int schriftgroesse = 5;
 
-	// private Position2D offsetBuchstaben = new Position2D(0, 0);
 	private Position2D offset = new Position2D(0, 0); // offset für den aktuellen Buchtsaben
 	private Roboter roboter;
 
