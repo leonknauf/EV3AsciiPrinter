@@ -9,7 +9,7 @@ import positions.Position3D;
 public class Blatt {
 	private Position2D platzZwischenBuchstaben = new Position2D(5, 0);
 	private int geschwindigkeit = 10;
-	private int breite = 160;
+	private int breite = 140;
 	private int zeilenabstand = 5;
 	private int schriftgroesse = 5;
 
@@ -17,9 +17,12 @@ public class Blatt {
 	private Position2D offset = new Position2D(0, 0); // offset für den aktuellen Buchtsaben
 	private Roboter roboter;
 
-	public Blatt(Roboter roboter, int schriftgroesse) {
+	public Blatt(Roboter roboter) {
 		this.roboter = roboter;
-		this.schriftgroesse = schriftgroesse;
+		Menu m = new Menu();
+		zeilenabstand=m.getZeilenabsstand();
+		schriftgroesse=m.getSchriftgroesse();
+		platzZwischenBuchstaben=new Position2D(m.getAbstandZwischenBuchstaben(), 0);
 	}
 
 	public void druckeZeichen(List<ASCIIZeichen> zeichen) {
