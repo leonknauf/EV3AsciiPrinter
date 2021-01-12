@@ -19,5 +19,9 @@ public class Position3D extends Position2D {
 	public boolean isZ() {
 		return z;
 	}
+	public void setZ(boolean z) {
+		this.z = z;
+		
+	}
 
 }

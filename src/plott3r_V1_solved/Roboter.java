@@ -146,6 +146,9 @@ public class Roboter {
 		this.currentPosition = new Position3D(xAchse.getPositionFromTachoCount(), yAchse.getPositionFromTachoCount(), zAchse.isAktiv());
 
 	}
+	public DualPositionAchse getZAchse() {
+		return this.zAchse;
+	}
 
 	private void resetTachoCounts() {
 		this.xAchse.resetTachoCount();
